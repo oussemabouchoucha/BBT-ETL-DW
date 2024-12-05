@@ -1,0 +1,4 @@
+*.parquet
+*.log
+*.crc
+*_SUCCESS
