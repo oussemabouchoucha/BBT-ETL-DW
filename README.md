@@ -12,14 +12,15 @@
      - [sales_currency.py](#sales_currencypy)  
      - [etl_gold/map_cols.py](#etl_goldmap_colspy)  
    - [Data Loading](#data-loading-etl_loadpy)
-3. [Data Warehouse Design Considerations](#data-warehouse-design-considerations)  
+3. [Power BI Dashboard](#power-bi-dashboard)  
+4. [Data Warehouse Design Considerations](#data-warehouse-design-considerations)  
    - [SCD Type 2 in Dimensions](#scd-type-2-in-dimensions)  
    - [Fact Table](#fact-table)  
    - [Date Dimension](#date-dimension)  
    - [Surrogate Keys](#surrogate-keys)
-4. [Prerequisites](#prerequisites)
-5. [Installation](#installation)
-6. [Usage](#usage)
+5. [Prerequisites](#prerequisites)
+6. [Installation](#installation)
+7. [Usage](#usage)
 
 ---
 
