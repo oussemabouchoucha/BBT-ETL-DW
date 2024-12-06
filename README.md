@@ -59,6 +59,28 @@ This script loads the transformed data into the target data warehouse or data la
 
 ---
 
+## Power BI Dashboard
+
+### Overview
+The Power BI dashboard is designed to provide actionable insights and visualize key performance metrics for the BBT Data Warehouse project.
+
+### Features:
+- **Sales by Region and Client Segment Performance**: Analyze regional sales performance and profitability by client segment using interactive visualizations.
+- **Dynamic Filters**: Filter by product, period, region, segment, and store status.
+
+### Dashboard Preview:
+#### Sales by Region and Client Segment Performance
+![Sales by Region and Client Segment Performance](PowerBI/screenshots/sales_and_client_performance.png)
+
+#### Store Growth Trends
+![Store Growth Trends](PowerBI/screenshots/store_growth_trends.png)
+
+### Download the Dashboard:
+The Power BI dashboard is available as a `.pbix` file. You can download and explore it in Power BI Desktop.
+
+[Download Dashboard](PowerBI/bbt.pbix)
+---
+
 ## Data Warehouse Design Considerations
 
 ### SCD Type 2 in Dimensions
@@ -86,7 +108,7 @@ The fact table utilizes surrogate keys (e.g., `SalesID`) to enhance performance 
 
 ### Clone this repository:
 ```bash
-git clone https://github.com/Hajjej-adam/spark_project.git
+git clone https://github.com/oussemabouchoucha/BBT-ETL-DW
 cd spark_project
 ```
 Install required Python libraries (Replace with specific commands for your libraries):
