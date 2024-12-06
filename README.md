@@ -103,6 +103,8 @@ Review and customize the data transformation logic within the etl_transformation
 
 Run the ETL process by executing the scripts in the correct sequence:
 
+```Bash
 python etl_extract.py
 python etl_transformation/data_cleaning.py (and other transformation scripts as needed)
 python etl_load.py
+```
