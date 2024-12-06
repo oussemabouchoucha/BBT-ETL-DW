@@ -99,7 +99,7 @@ pip install -r requirements.txt
 
 Configure connection details in the relevant scripts (e.g., database credentials for extraction, target data warehouse connection for loading).
 
-Review and customize the data transformation logic within the etl_transformation scripts to meet your specific needs.
+Review and customize the data transformation logic within the `etl_transformation` scripts to meet your specific needs.
 
 Run the ETL process by executing the scripts in the correct sequence:
 
