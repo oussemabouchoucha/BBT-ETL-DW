@@ -87,16 +87,15 @@ The fact table utilizes surrogate keys (e.g., `SalesID`) to enhance performance 
 ### Clone this repository:
 ```bash
 git clone https://github.com/Hajjej-adam/spark_project.git
-
-Use code with caution.
-
+cd spark_project
+```
 Install required Python libraries (Replace with specific commands for your libraries):
 
-Bash
+```Bash
 pip install -r requirements.txt
-Use code with caution.
+```
 
-Usage
+## Usage
 
 Configure connection details in the relevant scripts (e.g., database credentials for extraction, target data warehouse connection for loading).
 
