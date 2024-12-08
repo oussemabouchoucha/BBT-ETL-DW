@@ -3,8 +3,10 @@ import json
 import os
 import logging
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, when, regexp_replace, to_date, regexp_extract, udf,date_format
+from pyspark.sql.functions import col, when, regexp_replace, to_date, regexp_extract, udf,date_format, last
 from pyspark.sql.types import FloatType, IntegerType
+from pyspark.sql.window import Window
+
 
 # Initialize Spark session
 spark = SparkSession.builder \
@@ -61,7 +63,7 @@ clean_numeric_column_float_udf = udf(lambda value: clean_numeric_column(value, "
 clean_numeric_column_int_udf = udf(lambda value: clean_numeric_column(value, "int"), IntegerType())
 
 # Function to clean a DataFrame based on its audit report
-def clean_data(df, report, source_name):
+def clean_data(df, report, source_name, customer_df=None):
     """
     Cleans the DataFrame based on the audit report.
 
@@ -82,7 +84,7 @@ def clean_data(df, report, source_name):
     fill_values = {}
     for column, count_missing in missing_values.items():
         if count_missing > 0:
-            if column in ["ShipRegion", "ShipPostalCode", "ShipCountry", "CompanyName", "City", "PostalCode", "Fax", "Phone"]:
+            if column in ["ShipRegion", "ShipPostalCode", "CompanyName", "City", "PostalCode", "Fax", "Phone"]:
                 fill_values[column] = "Unknown"
                 log_message(f"Filling missing values in '{column}' with 'Unknown'")
             elif column in ["ShippedDate", "OrderDate", "RequiredDate"]:
@@ -96,6 +98,22 @@ def clean_data(df, report, source_name):
                 log_message(f"Filling missing values in '{column}' with 1")
             else:
                 fill_values[column] = "Unknown"  # Default fallback
+
+
+
+ # Handle missing ShipCountry specifically
+    if "ShipCountry" in df.columns:
+        # Define a Window partitioned by CustomerID
+        window_spec = Window.partitionBy("CustomerID").rowsBetween(Window.unboundedPreceding, Window.unboundedFollowing)
+        
+        # Fill ShipCountry using the last non-null value within the partition
+        df = df.withColumn("ShipCountry", 
+                           when(col("ShipCountry").isNull(), 
+                                last("ShipCountry", ignorenulls=True).over(window_spec))
+                           .otherwise(col("ShipCountry"))
+                          )
+        log_message(f"Filled missing 'ShipCountry' with values from the same 'CustomerID'")
+
 
     # Remove any None values from the dictionary
     fill_values = {k: v for k, v in fill_values.items() if v is not None}
